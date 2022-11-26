@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Context/AuthContext/AuthProvider";
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
+
+  const { createUser, updateUser } = useContext(AuthContext); //Getting the things form context
+
+
 
   //My handleSignUP start
 
   const handleSignUp = (data) => {
     console.log(data);
+    createUser(data.email, data.password)
+    .then(result => {
+     const user = result.user;
+     console.log(user);
+
+    })
+    .catch(error => {console.log(error);})
   };
 
   //My handleSignUP End
@@ -93,7 +104,7 @@ const SignUp = () => {
                   required: "Please select one",
                 })}
               >
-                <option defaultValue='' value="buyer">
+                <option defaultValue="" value="buyer">
                   Buyer
                 </option>
                 <option value="seller">Seller</option>
@@ -113,7 +124,7 @@ const SignUp = () => {
           {/* New Here? start */}
           <div className="bg-base-200 text-center font-bold">
             <p>
-             Already have an account? ?{" "}
+              Already have an account? ?{" "}
               <Link to="/login" className="text-red-600 ">
                 Login here
               </Link>
@@ -124,6 +135,6 @@ const SignUp = () => {
       </div>
     </div>
   );
-};;
+};
 
 export default SignUp;
