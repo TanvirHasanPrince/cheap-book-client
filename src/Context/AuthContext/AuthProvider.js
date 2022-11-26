@@ -34,9 +34,13 @@ const AuthProvider = ({ children }) => {
   };
 
   // Sign in the user end
+
+  // Updating user information start*******************************
   const updateUser = (userInfo) => {
     return updateProfile(user, userInfo);
   };
+
+  // Updating user information End*******************************
 
   //Log out the user start
   const logOut = () => {

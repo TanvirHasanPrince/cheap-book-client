@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthContext/AuthProvider";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const {
@@ -10,21 +11,27 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const { createUser, updateUser } = useContext(AuthContext); //Getting the things form context
+  const { createUser } = useContext(AuthContext); //Getting the things form context
 
-
+  const [signUpError, setSignUpError] = useState('')
 
   //My handleSignUP start
 
   const handleSignUp = (data) => {
     console.log(data);
+    setSignUpError('');
     createUser(data.email, data.password)
-    .then(result => {
-     const user = result.user;
-     console.log(user);
-
-    })
-    .catch(error => {console.log(error);})
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast('User Created successfully')
+      
+      
+      })
+      .catch((error) => {
+        console.log(error);
+        setSignUpError(error.message);
+      });
   };
 
   //My handleSignUP End
@@ -131,6 +138,7 @@ const SignUp = () => {
             </p>
           </div>
           {/* New Here? END */}
+          {signUpError && <p className="text-red-600"> {signUpError}</p>}
         </div>
       </div>
     </div>

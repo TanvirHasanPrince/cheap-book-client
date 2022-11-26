@@ -1,0 +1,17 @@
+[
+  {
+    "catetory-id": 1,
+
+    "categoryName": "Fantasy"
+  },
+  {
+    "catetory-id": 2,
+
+    "categoryName": "Adventure"
+  },
+  {
+    "catetory-id": 3,
+
+    "categoryName": "Fiction"
+  }
+]

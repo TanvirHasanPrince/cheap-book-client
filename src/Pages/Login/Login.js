@@ -1,34 +1,43 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthContext/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const {
     register,
     handleSubmit,
-  
+
     formState: { errors },
   } = useForm();
 
-  const [loginError, setLoginError] = useState('')
+  const [loginError, setLoginError] = useState("");
 
-  const {signIn} = useContext(AuthContext) // using the SignIn function from Authcontext
+  const { signIn } = useContext(AuthContext); // using the SignIn function from Authcontext
 
+  //Using privateRoute
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
   //My handlelogin start
 
   const handleLogin = (data) => {
-    setLoginError('')
+    setLoginError("");
     console.log(data);
     signIn(data.email, data.password)
-    .then(result => {
-      const user = result.user;
-      console.log(user);
-
-    }).catch(error => {console.log(error.message);
-    setLoginError(error.message);})
-
-  }
+      .then((result) => {
+        const user = result.user;
+        toast.success("You have logged in");
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setLoginError(error.message);
+      });
+  };
 
   //My handlelogin End
 
@@ -69,7 +78,11 @@ const Login = () => {
                   type="password"
                   {...register("password", {
                     required: "Password is required",
-                    minLength: {value: 6, message: "You password must be at least 6 characters long"}
+                    minLength: {
+                      value: 6,
+                      message:
+                        "You password must be at least 6 characters long",
+                    },
                   })}
                 />
                 {errors.password && (
@@ -80,9 +93,7 @@ const Login = () => {
                 <button className="btn btn-primary">Login</button>
               </div>
 
-              {
-                loginError && <p className='text-red-700'>{loginError}</p>
-              }
+              {loginError && <p className="text-red-700">{loginError}</p>}
             </div>
           </form>
           {/* FORM END */}
