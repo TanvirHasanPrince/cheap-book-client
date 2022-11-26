@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Context/AuthContext/AuthProvider";
 
 const Login = () => {
   const {
@@ -10,12 +11,22 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const [loginError, setLoginError] = useState('')
+
+  const {signIn} = useContext(AuthContext) // using the SignIn function from Authcontext
 
   //My handlelogin start
 
   const handleLogin = (data) => {
-
+    setLoginError('')
     console.log(data);
+    signIn(data.email, data.password)
+    .then(result => {
+      const user = result.user;
+      console.log(user);
+
+    }).catch(error => {console.log(error.message);
+    setLoginError(error.message);})
 
   }
 
@@ -68,6 +79,10 @@ const Login = () => {
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>
+
+              {
+                loginError && <p className='text-red-700'>{loginError}</p>
+              }
             </div>
           </form>
           {/* FORM END */}
