@@ -24,7 +24,12 @@ const Categories = () => {
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:grid-cols-1 py-10">
         {categories.map((category) => (
-          <Link className="text-center py-5 border-4 border-primary">{category.categoryName}</Link>
+          <Link
+            to={`/categories/${category.categoryName}`}
+            className="text-center py-5 border-4 border-primary"
+          >
+            {category.categoryName}
+          </Link>
         ))}
       </div>
     </div>

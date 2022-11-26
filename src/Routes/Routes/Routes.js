@@ -4,6 +4,7 @@ import Main from "../../Layout/Main";
 import Blog from "../../Pages/Blog/Blog";
 import BooksPage from "../../Pages/Books/Books/BooksPage";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
+import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
@@ -31,8 +32,9 @@ export const router = createBrowserRouter([
         element: <Blog></Blog>,
       },
       {
-        path: "/books",
+        path: "/categories/:id",
         element: <BooksPage></BooksPage>,
+        loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`),
       },
     ],
   },
@@ -44,9 +46,11 @@ export const router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
-    children: [{
-      path: '/dashboard',
-      element: <Dashboard></Dashboard>
-    }]
+    children: [
+      {
+        path: "/dashboard",
+        element: <MyOrders></MyOrders>,
+      },
+    ],
   },
 ]);

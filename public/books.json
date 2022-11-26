@@ -1,26 +1,40 @@
 [
- {
+  {
+    "image": "https://static-01.daraz.com.bd/p/88c8fe011aa2683f66e43efe9922dafc.jpg",
+    "bookName": "Harry potter and the Prizoner of Azkaban",
+    "authorName": "JK Rowling",
+    "sellerLocation": "Dhaka",
+    "resellPrice": "500",
+    "originalPrice": "1000",
+    "yearsOfUse": 3,
+    "dateOfPosting": 2015,
+    "categoryId": 1,
+    "categoryName": "Fantasy"
+  },
 
-"image": "https://static-01.daraz.com.bd/p/88c8fe011aa2683f66e43efe9922dafc.jpg",
+  {
+    "image": "https://static-01.daraz.com.bd/p/88c8fe011aa2683f66e43efe9922dafc.jpg",
+    "bookName": "Harry potter and the Prizoner of Azkaban",
+    "authorName": "JK Rowling",
+    "sellerLocation": "Dhaka",
+    "resellPrice": "500",
+    "originalPrice": "1000",
+    "yearsOfUse": 3,
+    "dateOfPosting": 2015,
+    "categoryId": 2,
+    "categoryName": "Fantasy"
+  },
 
-"bookName": "Harry potter and the Prizoner of Azkaban",
-
-"authorName": "JK Rowling",
-
-"sellerLocation": "Dhaka",
-
-"resellPrice": "500",
-
-"originalPrice": "1000",
-
-"yearsOfUse": 3,
-
-"dateOfPosting": 2015,
-
-"categoryId": 1,
-
-"categoryName": "Fantasy"
-
-}
+  {
+    "image": "https://static-01.daraz.com.bd/p/88c8fe011aa2683f66e43efe9922dafc.jpg",
+    "bookName": "Harry potter and the Prizoner of Azkaban",
+    "authorName": "JK Rowling",
+    "sellerLocation": "Dhaka",
+    "resellPrice": "500",
+    "originalPrice": "1000",
+    "yearsOfUse": 3,
+    "dateOfPosting": 2015,
+    "categoryId": 3,
+    "categoryName": "Fantasy"
+  }
 ]
-
