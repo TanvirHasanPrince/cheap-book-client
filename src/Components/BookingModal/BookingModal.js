@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/AuthContext/AuthProvider";
 
 const BookingModal = ({ chosenBook, setChosenBook }) => {
@@ -45,9 +46,24 @@ const BookingModal = ({ chosenBook, setChosenBook }) => {
       meetLocation: meetLocation,
     };
 
-    console.log(bookingInformation);
+    //Sending data to server
+    fetch(`http://localhost:5000/bookings`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingInformation),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          setChosenBook(null);
+          toast.success("Your booking has been submitted");
+        }
+      });
 
-    setChosenBook(null);
+    console.log(bookingInformation);
   };
   //Handling Event End
 
@@ -87,6 +103,7 @@ const BookingModal = ({ chosenBook, setChosenBook }) => {
             <input
               name="buyerName"
               type="text"
+              defaultValue={user?.displayName}
               placeholder="Your Name"
               className="input input-bordered input-primary w-full"
             />
@@ -94,7 +111,7 @@ const BookingModal = ({ chosenBook, setChosenBook }) => {
               name="email"
               type="text"
               disabled
-              value={user?.email}
+              defaultValue={user?.email}
               placeholder="Email"
               className="input input-bordered input-primary w-full"
             />
@@ -104,10 +121,10 @@ const BookingModal = ({ chosenBook, setChosenBook }) => {
               placeholder="Phone number"
               className="input input-bordered input-primary w-full"
             />
+            <p>Select Your location</p>
             <select className="select w-full " name="meetingLocation">
-              <option value="none">Pick your meeting location</option>
               <option value="dhaka">Dhaka</option>
-              <option value="chittagon">Chittagong</option>
+              <option value="chittagong">Chittagong</option>
               <option value="khulna">Khulna</option>
               <option value="barishal">Barishal</option>
               <option value="sylhet">Sylhet</option>

@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthContext/AuthProvider";
 import toast from "react-hot-toast";
+import { updateCurrentUser } from "firebase/auth";
 
 const SignUp = () => {
   const {
@@ -14,6 +15,7 @@ const SignUp = () => {
   const { createUser } = useContext(AuthContext); //Getting the things form context
 
   const [signUpError, setSignUpError] = useState('')
+  const navigate = useNavigate();
 
   //My handleSignUP start
 
@@ -24,7 +26,16 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        toast('User Created successfully')
+
+        toast.success('User Created successfully');
+        navigate('/');
+        const userInfo = {
+          displayName: data.name,
+         
+        };
+        updateCurrentUser(userInfo)
+          .then(() => {})
+          .catch((err) => console.log(err));
       
       
       })
