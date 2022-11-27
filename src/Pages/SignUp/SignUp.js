@@ -29,7 +29,7 @@ const SignUp = () => {
 
         toast.success("User Created successfully");
         saveUser(data.name, data.email, data.role);
-        
+
         const userInfo = {
           displayName: data.name,
         };
@@ -46,18 +46,20 @@ const SignUp = () => {
   //Start:For sending user to DB
 
   const saveUser = (name, role, email) => {
-const user = {name, role, email};
-fetch("http://localhost:5000/users", {
-  method: 'POST',
-  headers: {
-    'content-type': 'application/json'
-  },
-  body: JSON.stringify(user)
-}).then(res => res.json()).then(data => {
-  console.log(data);
-  navigate("/");
-})
-  }
+    const user = { name, role, email };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        navigate("/");
+      });
+  };
   //End :For sending user to DB
 
   //My handleSignUP End
