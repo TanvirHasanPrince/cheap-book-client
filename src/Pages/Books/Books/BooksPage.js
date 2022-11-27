@@ -1,12 +1,15 @@
 
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Book from "./Book";
+import BookingModal from '../../../Components/BookingModal/BookingModal'
 
 const BooksPage = () => {
 
  const books = useLoaderData();
+ const [chosenBook, setChosenBook] = useState(null)
+
 
   // const {data: books = [],refetch,isLoading,
   // } = useQuery({
@@ -64,12 +67,15 @@ const BooksPage = () => {
 
   return (
     <div>
-      <h3 className='text-center font-bold text-primary text-4xl'>Books in this category</h3>
+      <h3 className="text-center font-bold text-primary text-4xl">
+        Books in this category
+      </h3>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:grid-cols-1 py-10">
         {books.map((book, i) => (
-          <Book key={i} book={book}></Book>
+          <Book key={i} book={book} setChosenBook={setChosenBook}></Book>
         ))}
       </div>
+      {chosenBook && <BookingModal chosenBook={chosenBook}></BookingModal>}
     </div>
   );
 };
