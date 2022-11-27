@@ -75,7 +75,12 @@ const BooksPage = () => {
           <Book key={i} book={book} setChosenBook={setChosenBook}></Book>
         ))}
       </div>
-      {chosenBook && <BookingModal chosenBook={chosenBook}></BookingModal>}
+      {chosenBook && (
+        <BookingModal
+          chosenBook={chosenBook}
+          setChosenBook={setChosenBook}
+        ></BookingModal>
+      )}
     </div>
   );
 };
