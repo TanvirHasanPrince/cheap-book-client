@@ -45,8 +45,8 @@ const SignUp = () => {
 
   //Start:For sending user to DB
 
-  const saveUser = (name, role, email) => {
-    const user = { name, role, email };
+  const saveUser = (name,  email, role) => {
+    const user = { name, email, role };
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
