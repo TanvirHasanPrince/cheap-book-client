@@ -14,36 +14,51 @@ const SignUp = () => {
 
   const { createUser } = useContext(AuthContext); //Getting the things form context
 
-  const [signUpError, setSignUpError] = useState('')
+  const [signUpError, setSignUpError] = useState("");
   const navigate = useNavigate();
 
   //My handleSignUP start
 
   const handleSignUp = (data) => {
     console.log(data);
-    setSignUpError('');
+    setSignUpError("");
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
 
-        toast.success('User Created successfully');
-        navigate('/');
+        toast.success("User Created successfully");
+        saveUser(data.name, data.email, data.role);
+        
         const userInfo = {
           displayName: data.name,
-         
         };
         updateCurrentUser(userInfo)
           .then(() => {})
           .catch((err) => console.log(err));
-      
-      
       })
       .catch((error) => {
         console.log(error);
         setSignUpError(error.message);
       });
   };
+
+  //Start:For sending user to DB
+
+  const saveUser = (name, role, email) => {
+const user = {name, role, email};
+fetch("http://localhost:5000/users", {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json'
+  },
+  body: JSON.stringify(user)
+}).then(res => res.json()).then(data => {
+  console.log(data);
+  navigate("/");
+})
+  }
+  //End :For sending user to DB
 
   //My handleSignUP End
   return (
