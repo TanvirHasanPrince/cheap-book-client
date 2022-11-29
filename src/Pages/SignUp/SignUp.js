@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthContext/AuthProvider";
 import toast from "react-hot-toast";
 import { updateCurrentUser } from "firebase/auth";
+import useToken from "../../Hooks/useToken";
 
 const SignUp = () => {
   const {
@@ -15,9 +16,16 @@ const SignUp = () => {
   const { createUser } = useContext(AuthContext); //Getting the things form context
 
   const [signUpError, setSignUpError] = useState("");
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
+
   //My handleSignUP start
+
+  if(token) {
+    navigate('/')
+  }
 
   const handleSignUp = (data) => {
     console.log(data);
@@ -45,7 +53,7 @@ const SignUp = () => {
 
   //Start:For sending user to DB
 
-  const saveUser = (name,  email, role) => {
+  const saveUser = (name, email, role) => {
     const user = { name, email, role };
     fetch("http://localhost:5000/users", {
       method: "POST",
@@ -56,11 +64,23 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        navigate("/");
+        // getUserToken(email);
+        setCreatedUserEmail(email);
+        
       });
   };
   //End :For sending user to DB
+
+  // Start: JWT
+// const getUserToken = email => {
+//   fetch(`http://localhost:5000/jwt?email=${email}`).then(res => res.json()).then(data => {
+//     if (data.accessToken) {
+//       localStorage.setItem('accessToken', data.accessToken);
+//       navigate("/");
+//     }
+//   })
+// }
+  //End: JWT
 
   //My handleSignUP End
   return (

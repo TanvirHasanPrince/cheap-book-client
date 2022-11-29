@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 const AllUsers = () => {
   const url = `http://localhost:5000/users`;
 
-  const { data: users = [], refetch} = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await fetch(url);
@@ -14,18 +14,18 @@ const AllUsers = () => {
     },
   });
 
-  const handleMakeAdmin = id => {
-   fetch(`http://localhost:5000/users/admin/${id}`, {
-    method: 'PUT'
-   }).then(res => res.json()).then(data => {
-   
-    if(data.modifiedCount > 0) {
-     toast.success('Made admin successfully');
-     refetch();
-    }
-   
-   })
-  }
+  const handleMakeAdmin = (id) => {
+    fetch(`http://localhost:5000/users/admin/${id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Made admin successfully");
+          refetch();
+        }
+      });
+  };
 
   return (
     <div>
@@ -54,7 +54,6 @@ const AllUsers = () => {
                 <td>{user.role}</td>
                 <td>Not Verified</td>
                 <td>
-                 
                   {user?.role !== "admin" && (
                     <button
                       onClick={() => handleMakeAdmin(user._id)}
