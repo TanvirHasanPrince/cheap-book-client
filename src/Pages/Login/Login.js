@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthContext/AuthProvider";
 import toast from "react-hot-toast";
+import useToken from "../../Hooks/useToken";
 
 const Login = () => {
   const {
@@ -15,6 +16,8 @@ const Login = () => {
   const [loginError, setLoginError] = useState("");
 
   const { signIn } = useContext(AuthContext); // using the SignIn function from Authcontext
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  const [token] = useToken(loginUserEmail);
 
   //Using privateRoute
   const location = useLocation();
@@ -22,6 +25,10 @@ const Login = () => {
 
   const from = location.state?.from?.pathname || "/";
   //My handlelogin start
+
+  if(token) {
+     navigate(from, { replace: true });
+  }
 
   const handleLogin = (data) => {
     setLoginError("");
@@ -31,7 +38,8 @@ const Login = () => {
         const user = result.user;
         toast.success("You have logged in");
         console.log(user);
-        navigate(from, { replace: true });
+        setLoginUserEmail(data.email);
+   
       })
       .catch((error) => {
         console.log(error.message);

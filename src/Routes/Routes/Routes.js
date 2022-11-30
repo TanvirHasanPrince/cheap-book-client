@@ -3,12 +3,14 @@ import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Blog from "../../Pages/Blog/Blog";
 import BooksPage from "../../Pages/Books/Books/BooksPage";
+import AddAProduct from "../../Pages/Dashboard/AddAProduct/AddAProduct";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -55,7 +57,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/allusers",
-        element: <AllUsers></AllUsers>,
+        element: (
+         
+            <AllUsers></AllUsers>
+         
+        ),
+      },
+      {
+        path: "/dashboard/addaproduct",
+        element: (
+         
+            <AddAProduct></AddAProduct>
+         
+        ),
       },
     ],
   },
