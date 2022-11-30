@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthContext/AuthProvider";
 
 const AddAProduct = () => {
   const {
@@ -9,6 +11,10 @@ const AddAProduct = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const {user} = useContext(AuthContext);
+  console.log(user?.email)
+
+  const navigate = useNavigate();
 
   const imageHostKey = process.env.REACT_APP_imgbb_key;
 
@@ -37,6 +43,7 @@ const AddAProduct = () => {
         sold:"Unsold",
         categoryName: data.categoryName,
         image: imgData.data.url,
+        email: user?.email,
       };
 
       //Save Books to DB;
@@ -49,12 +56,14 @@ const AddAProduct = () => {
       })
         .then((res) => res.json())
         .then((result) => console.log(result));
+        toast.success(`The book named "${data.bookName}" added successfully`);
+        navigate('/dashboard/mybooks');
      }
     })
   };
 
   return (
-    <div className="m-10">
+    <div className="m-5">
       {/* FORM START */}
       <form
         onSubmit={handleSubmit(addBoook)}

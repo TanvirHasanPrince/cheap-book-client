@@ -6,6 +6,7 @@ import BooksPage from "../../Pages/Books/Books/BooksPage";
 import AddAProduct from "../../Pages/Dashboard/AddAProduct/AddAProduct";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
+import MyBooks from "../../Pages/Dashboard/MyBooks/MyBooks";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -68,6 +69,14 @@ export const router = createBrowserRouter([
         element: (
          
             <AddAProduct></AddAProduct>
+         
+        ),
+      },
+      {
+        path: "/dashboard/mybooks",
+        element: (
+         
+           <MyBooks></MyBooks>
          
         ),
       },
