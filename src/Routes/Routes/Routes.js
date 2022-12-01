@@ -8,6 +8,7 @@ import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
 import MyBooks from "../../Pages/Dashboard/MyBooks/MyBooks";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import Error from "../../Pages/Eroor/Error";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
@@ -49,7 +50,7 @@ export const router = createBrowserRouter([
   },
 
   {
-    path: "/dashboard",
+    path: "/dashboard/",
     element: (
       <PrivateRoute>
         <DashboardLayout></DashboardLayout>
@@ -73,5 +74,9 @@ export const router = createBrowserRouter([
         element: <MyBooks></MyBooks>,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Error></Error>,
   },
 ]);

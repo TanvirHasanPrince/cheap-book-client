@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -59,7 +59,7 @@ const AddAProduct = () => {
         .then((res) => res.json())
         .then((result) => console.log(result));
         toast.success(`The book named "${data.bookName}" added successfully`);
-        
+
         navigate('/dashboard/mybooks');
      }
     })

@@ -40,7 +40,7 @@ const DashboardLayout = () => {
             {isBuyer && (
               <>
                 <li>
-                  <Link to="/dashboard">My Bookings</Link>
+                  <Link to="/dashboard/myorders">My Bookings</Link>
                 </li>
               </>
             )}
