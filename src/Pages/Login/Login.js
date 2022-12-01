@@ -10,12 +10,14 @@ const Login = () => {
     register,
     handleSubmit,
 
+    
+
     formState: { errors },
   } = useForm();
 
   const [loginError, setLoginError] = useState("");
 
-  const { signIn } = useContext(AuthContext); // using the SignIn function from Authcontext
+  const { signIn, handleGoogleSignIn } = useContext(AuthContext); // using the SignIn function from Authcontext
   const [loginUserEmail, setLoginUserEmail] = useState("");
   const [token] = useToken(loginUserEmail);
 
@@ -116,6 +118,10 @@ const Login = () => {
             </p>
           </div>
           {/* New Here? END */}
+
+          <div className="form-control mt-6">
+            <button onClick={handleGoogleSignIn} className="btn btn-primary">Sign In with Google</button>
+          </div>
         </div>
       </div>
     </div>

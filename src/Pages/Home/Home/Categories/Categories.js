@@ -24,12 +24,25 @@ const Categories = () => {
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:grid-cols-1 py-10">
         {categories.map((category) => (
-          <Link
-            to={`/categories/${category.categoryName}`}
-            className="text-center py-5 border-4 border-primary"
-          >
-            {category.categoryName}
-          </Link>
+          <>
+            <div className="card w-96 bg-base-100 shadow-xl image-full">
+              <figure>
+                <img className=" image-full" src={category.bg} alt="Shoes" />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title"> {category.categoryName}</h2>
+
+                <div className="card-actions justify-end">
+                  <Link
+                    to={`/categories/${category.categoryName}`}
+                    className="btn btn-primary"
+                  >
+                    {category.categoryName}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </>
         ))}
       </div>
     </div>

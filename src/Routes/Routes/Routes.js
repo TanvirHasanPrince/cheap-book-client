@@ -37,7 +37,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/categories/:id",
-        element: <BooksPage></BooksPage>,
+        element: (
+          <PrivateRoute>
+            <BooksPage></BooksPage>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/categories/${params.id}`),
       },
@@ -53,32 +57,20 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashboard",
+        path: "/dashboard/myorders",
         element: <MyOrders></MyOrders>,
       },
       {
         path: "/dashboard/allusers",
-        element: (
-         
-            <AllUsers></AllUsers>
-         
-        ),
+        element: <AllUsers></AllUsers>,
       },
       {
         path: "/dashboard/addaproduct",
-        element: (
-         
-            <AddAProduct></AddAProduct>
-         
-        ),
+        element: <AddAProduct></AddAProduct>,
       },
       {
         path: "/dashboard/mybooks",
-        element: (
-         
-           <MyBooks></MyBooks>
-         
-        ),
+        element: <MyBooks></MyBooks>,
       },
     ],
   },

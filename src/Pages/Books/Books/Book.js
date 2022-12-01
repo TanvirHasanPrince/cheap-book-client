@@ -10,6 +10,9 @@ const Book = ({ book, setChosenBook }) => {
     originalPrice,
     yearsOfUse,
     dateOfPosting,
+    sellerVerified,
+    sold,
+    sellerName,
   } = book;
 
   return (
@@ -24,8 +27,23 @@ const Book = ({ book, setChosenBook }) => {
           <p>Selling price: BDT. {resellPrice}</p>
           <p>Buying price: BDT. {originalPrice}</p>
           <p>Buying year: {yearsOfUse}</p>
-          <p> Posted on: {dateOfPosting}</p>
+
           <p> Location: {sellerLocation}</p>
+          <p> Seller Name: {sellerName} </p>
+          <p>
+            {" "}
+            Seller verification status: {sellerVerified}{" "}
+            {sellerVerified === "yes" && (
+              <input
+                type="checkbox"
+                checked
+                className="checkbox checkbox-info"
+              />
+            )}
+            {(sellerVerified) === undefined && (
+              <p  className=" text-red-600">Seller is not verified</p>
+            )}
+          </p>
 
           <div className="card-actions">
             <label

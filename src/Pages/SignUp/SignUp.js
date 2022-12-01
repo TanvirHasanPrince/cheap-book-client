@@ -13,7 +13,7 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const { createUser } = useContext(AuthContext); //Getting the things form context
+  const { createUser, handleGoogleSignIn} = useContext(AuthContext); //Getting the things form context
 
   const [signUpError, setSignUpError] = useState("");
   const [createdUserEmail, setCreatedUserEmail] = useState("");
@@ -187,6 +187,11 @@ const SignUp = () => {
           </div>
           {/* New Here? END */}
           {signUpError && <p className="text-red-600"> {signUpError}</p>}
+          <div className="bg-base-200 text-center font-bold">
+            <button onClick={handleGoogleSignIn} className="btn btn-primary">
+              Sign Up with Google
+            </button>
+          </div>
         </div>
       </div>
     </div>

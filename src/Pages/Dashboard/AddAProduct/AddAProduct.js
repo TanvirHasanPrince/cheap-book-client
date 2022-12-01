@@ -40,11 +40,12 @@ const AddAProduct = () => {
         resellPrice: data.resellPrice,
         originalPrice: data.originalPrice,
         yearsOfUse: data.yearsOfUse,
-        sold:"Unsold",
+        sold: "Unsold",
         categoryName: data.categoryName,
         image: imgData.data.url,
         email: user?.email,
-        
+        sellerVerified: "yes",
+        sellerName: data.sellerName,
       };
 
       //Save Books to DB;
@@ -58,6 +59,7 @@ const AddAProduct = () => {
         .then((res) => res.json())
         .then((result) => console.log(result));
         toast.success(`The book named "${data.bookName}" added successfully`);
+        
         navigate('/dashboard/mybooks');
      }
     })
@@ -74,6 +76,21 @@ const AddAProduct = () => {
           {/* ******************************************************* */}
           <div className="form-control">
             <label className="label">
+              <span className="label-text">Your Name</span>
+            </label>
+            <input
+              className="input input-bordered"
+              type="text"
+              {...register("sellerName", {
+                required: "Please fill up this field",
+              })}
+            />
+          </div>
+          {/* ******************************************************* */}
+
+          {/* ******************************************************* */}
+          <div className="form-control">
+            <label className="label">
               <span className="label-text">Name of the book</span>
             </label>
             <input
@@ -83,10 +100,6 @@ const AddAProduct = () => {
                 required: "Please fill up this field",
               })}
             />
-
-            
-            
-            
           </div>
           {/* ******************************************************* */}
           {/* ******************************************************* */}

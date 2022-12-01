@@ -18,9 +18,10 @@ const MyBooks = () => {
       const res = await fetch(url, {});
       const data = await res.json();
       return data;
+
     },
   });
-
+refetch();
   const handleDeleteBook = (id) => {
     // const url = `http://localhost:5000/books/${id}`;
     // console.log(url);
@@ -49,7 +50,7 @@ const MyBooks = () => {
         <table className="table w-full">
           <thead>
             <tr>
-              <th>Order Number</th>
+              <th>Index</th>
               <th>Image</th>
               <th>Book Name</th>
               <th>Price</th>
@@ -61,7 +62,7 @@ const MyBooks = () => {
           <tbody>
             {books.map((book, i) => (
               <tr key={book._id}>
-                <td>{book._id}</td>
+                <td>{i+1}</td>
                 <td>
                   <div className="avatar">
                     <div className="w-20 rounded">
