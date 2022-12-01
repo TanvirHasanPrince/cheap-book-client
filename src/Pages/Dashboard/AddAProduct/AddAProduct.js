@@ -44,6 +44,7 @@ const AddAProduct = () => {
         categoryName: data.categoryName,
         image: imgData.data.url,
         email: user?.email,
+        
       };
 
       //Save Books to DB;
