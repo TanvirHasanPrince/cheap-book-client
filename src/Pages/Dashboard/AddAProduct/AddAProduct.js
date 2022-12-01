@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthContext/AuthProvider";
 
 const AddAProduct = () => {
@@ -11,58 +11,59 @@ const AddAProduct = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const {user} = useContext(AuthContext);
-  console.log(user?.email)
+  const { user } = useContext(AuthContext);
+  console.log(user?.email);
 
   const navigate = useNavigate();
 
   const imageHostKey = process.env.REACT_APP_imgbb_key;
-
 
   const addBoook = (data) => {
     console.log(data);
     console.log(data.image[0]);
     const image = data.image[0];
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
     fetch(url, {
-     method: 'POST',
-     body: formData
-    }).then(res => res.json()).then(imgData => {
-     console.log(imgData);
-     if(imgData.success) {
-      console.log(imgData.data.url)
-      const book = {
-        bookName: data.bookName,
-        authorName: data.authorName,
-        sellerLocation: data.sellerLocation,
-        resellPrice: data.resellPrice,
-        originalPrice: data.originalPrice,
-        yearsOfUse: data.yearsOfUse,
-        sold: "Unsold",
-        categoryName: data.categoryName,
-        image: imgData.data.url,
-        email: user?.email,
-        sellerVerified: "yes",
-        sellerName: data.sellerName,
-      };
-
-      //Save Books to DB;
-      fetch(`http://localhost:5000/books`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(book),
-      })
-        .then((res) => res.json())
-        .then((result) => console.log(result));
-        toast.success(`The book named "${data.bookName}" added successfully`);
-
-        navigate('/dashboard/mybooks');
-     }
+      method: "POST",
+      body: formData,
     })
+      .then((res) => res.json())
+      .then((imgData) => {
+        console.log(imgData);
+        if (imgData.success) {
+          console.log(imgData.data.url);
+          const book = {
+            bookName: data.bookName,
+            authorName: data.authorName,
+            sellerLocation: data.sellerLocation,
+            resellPrice: data.resellPrice,
+            originalPrice: data.originalPrice,
+            yearsOfUse: data.yearsOfUse,
+            sold: "Unsold",
+            categoryName: data.categoryName,
+            image: imgData.data.url,
+            email: user?.email,
+            sellerVerified: "yes",
+            sellerName: data.sellerName,
+          };
+
+          //Save Books to DB;
+          fetch(`https://a12-server.vercel.app/books`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(book),
+          })
+            .then((res) => res.json())
+            .then((result) => console.log(result));
+          toast.success(`The book named "${data.bookName}" added successfully`);
+
+          navigate("/dashboard/mybooks");
+        }
+      });
   };
 
   return (

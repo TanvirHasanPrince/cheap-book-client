@@ -2,14 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-
 const Categories = () => {
-  const {data: categories = [],refetch,isLoading,
+  const {
+    data: categories = [],
+    refetch,
+    isLoading,
   } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/categories`);
+      const res = await fetch(`https://a12-server.vercel.app/categories`);
       const data = await res.json();
       return data;
     },

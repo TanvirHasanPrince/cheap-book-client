@@ -6,7 +6,7 @@ import { AuthContext } from "../../../Context/AuthContext/AuthProvider";
 
 const MyBooks = () => {
   const { user } = useContext(AuthContext);
-  const url = `http://localhost:5000/books?email=${user?.email}`;
+  const url = `https://a12-server.vercel.app/books?email=${user?.email}`;
 
   const {
     data: books = [],
@@ -18,14 +18,13 @@ const MyBooks = () => {
       const res = await fetch(url, {});
       const data = await res.json();
       return data;
-
     },
   });
-refetch();
+  refetch();
   const handleDeleteBook = (id) => {
-    // const url = `http://localhost:5000/books/${id}`;
+    // const url = `https://a12-server.vercel.app/books/${id}`;
     // console.log(url);
-    fetch(`http://localhost:5000/books/${id}`, {
+    fetch(`https://a12-server.vercel.app/books/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -62,7 +61,7 @@ refetch();
           <tbody>
             {books.map((book, i) => (
               <tr key={book._id}>
-                <td>{i+1}</td>
+                <td>{i + 1}</td>
                 <td>
                   <div className="avatar">
                     <div className="w-20 rounded">

@@ -5,22 +5,20 @@ import { AuthContext } from "../../../Context/AuthContext/AuthProvider";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/bookings?email=${user?.email}`;
+  const url = `https://a12-server.vercel.app/bookings?email=${user?.email}`;
 
   const { data: bookings = [] } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
-      const res = await fetch(url,{ 
+      const res = await fetch(url, {
         headers: {
-          authorization: `bearer ${localStorage.getItem('accessToken')}`
-        }
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
       });
       const data = await res.json();
       return data;
     },
   });
-
-  
 
   return (
     <div>
@@ -40,7 +38,7 @@ const MyOrders = () => {
           <tbody>
             {bookings.map((booking, i) => (
               <tr>
-                <th>{i+1}</th>
+                <th>{i + 1}</th>
                 <td>{booking.bookName}</td>
                 <td>{booking.price}</td>
                 <td>Not Paid</td>

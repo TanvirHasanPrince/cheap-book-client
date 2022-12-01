@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const AllUsers = () => {
-  const url = `http://localhost:5000/users`;
+  const url = `https://a12-server.vercel.app/users`;
 
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
@@ -16,11 +16,11 @@ const AllUsers = () => {
   });
 
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`https://a12-server.vercel.app/users/admin/${id}`, {
       method: "PUT",
-      headers: { 
-        authorization: `bearer ${localStorage.getItem('accessToken')}`
-      }
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -31,21 +31,20 @@ const AllUsers = () => {
       });
   };
 
-    const handleDeleteUser = (id) => {
-      // const url = `http://localhost:5000/users/${id}`;
-      // console.log(url);
-      fetch(`http://localhost:5000/users/${id}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.deletedCount > 0) {
-            toast.success(`User deleted successfully`);
-            refetch();
-          }
-        });
-    };
-
+  const handleDeleteUser = (id) => {
+    // const url = `https://a12-server.vercel.app/users/${id}`;
+    // console.log(url);
+    fetch(`https://a12-server.vercel.app/users/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success(`User deleted successfully`);
+          refetch();
+        }
+      });
+  };
 
   return (
     <div>
@@ -84,7 +83,14 @@ const AllUsers = () => {
                   )}
                 </td>
                 <td>
-                  <Link onClick={()=> {handleDeleteUser(user._id);}} className="btn btn-xs btn-secondary">Delete</Link>
+                  <Link
+                    onClick={() => {
+                      handleDeleteUser(user._id);
+                    }}
+                    className="btn btn-xs btn-secondary"
+                  >
+                    Delete
+                  </Link>
                 </td>
               </tr>
             ))}

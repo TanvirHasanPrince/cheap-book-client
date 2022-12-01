@@ -1,21 +1,18 @@
-
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Book from "./Book";
-import BookingModal from '../../../Components/BookingModal/BookingModal'
+import BookingModal from "../../../Components/BookingModal/BookingModal";
 
 const BooksPage = () => {
-
- const books = useLoaderData();
- const [chosenBook, setChosenBook] = useState(null)
-
+  const books = useLoaderData();
+  const [chosenBook, setChosenBook] = useState(null);
 
   // const {data: books = [],refetch,isLoading,
   // } = useQuery({
   //   queryKey: ["categories", ],
   //   queryFn: async () => {
-  //     const res = await fetch(`http://localhost:5000/categories/${id}`);
+  //     const res = await fetch(`https://a12-server.vercel.app/categories/${id}`);
   //     const data = await res.json();
   //     return data;
   //   },

@@ -13,18 +13,17 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const { createUser, handleGoogleSignIn} = useContext(AuthContext); //Getting the things form context
+  const { createUser, handleGoogleSignIn } = useContext(AuthContext); //Getting the things form context
 
   const [signUpError, setSignUpError] = useState("");
   const [createdUserEmail, setCreatedUserEmail] = useState("");
   const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
-
   //My handleSignUP start
 
-  if(token) {
-    navigate('/')
+  if (token) {
+    navigate("/");
   }
 
   const handleSignUp = (data) => {
@@ -55,7 +54,7 @@ const SignUp = () => {
 
   const saveUser = (name, email, role) => {
     const user = { name, email, role };
-    fetch("http://localhost:5000/users", {
+    fetch("https://a12-server.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -66,20 +65,19 @@ const SignUp = () => {
       .then((data) => {
         // getUserToken(email);
         setCreatedUserEmail(email);
-        
       });
   };
   //End :For sending user to DB
 
   // Start: JWT
-// const getUserToken = email => {
-//   fetch(`http://localhost:5000/jwt?email=${email}`).then(res => res.json()).then(data => {
-//     if (data.accessToken) {
-//       localStorage.setItem('accessToken', data.accessToken);
-//       navigate("/");
-//     }
-//   })
-// }
+  // const getUserToken = email => {
+  //   fetch(`https://a12-server.vercel.app/jwt?email=${email}`).then(res => res.json()).then(data => {
+  //     if (data.accessToken) {
+  //       localStorage.setItem('accessToken', data.accessToken);
+  //       navigate("/");
+  //     }
+  //   })
+  // }
   //End: JWT
 
   //My handleSignUP End

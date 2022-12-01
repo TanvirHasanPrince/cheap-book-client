@@ -1,16 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
-import AdvItems from './AdvItems';
-
+import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
+import AdvItems from "./AdvItems";
 
 const Adv = () => {
-const [advBooks, setAdvBooks] = useState([]);
+  const [advBooks, setAdvBooks] = useState([]);
 
-useEffect(() => {
-  fetch(`http://localhost:5000/books/unsold`)
-  .then(res => res.json())
-  .then(data => setAdvBooks(data))
-}, [])
+  useEffect(() => {
+    fetch(`https://a12-server.vercel.app/books/unsold`)
+      .then((res) => res.json())
+      .then((data) => setAdvBooks(data));
+  }, []);
 
   return (
     <div>
@@ -19,7 +18,7 @@ useEffect(() => {
       </h3>
       <div className="grid gap-3 grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
         {advBooks.map((t, i) => (
-          <AdvItems key ={i} t={t}></AdvItems>
+          <AdvItems key={i} t={t}></AdvItems>
         ))}
       </div>
     </div>
