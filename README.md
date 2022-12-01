@@ -10,7 +10,7 @@
  - Tailwind
  - DaisyUI
   
-  # Live link:
+  # Live link: https://cheap-book.web.app/
 
   # Function: 
   - Seller 
